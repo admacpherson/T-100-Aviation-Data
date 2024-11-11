@@ -22,6 +22,35 @@ The analysis of load factor can be performed along several different variables. 
 
 Looking at the best and worst performing international routes by load factor, we see that the top 3 are Southwest's Punta Cana, DR to Baltimore, American's Chicago O'Hare to San Jose del Cabo, MX, and American's Dallas-Fort Worth to Punta Cana, DR (American and Punta Cana are also #4 on the list). The worst 3 performers were Spirit's Fort Lauderdale to Port-au-Prince, Haiti, United's Nagoya, Japan to Guam, and United's return flight from Guam to Nagoya. While the Port-au-Prince route's worst-in-class performance is understandable due to the recent political instability and violence in Haiti, it seems that United's GUM-NGO route pairing does not have a lot of demand as its load factor is appoximately only 20%. While there may be additional considerations, such as Essential Air Service subsidies or network feed, the LF data seem to suggest the route is not independently commercially viable.
 
+#### Best & Worst Domestic LF by Route & Airline
+|Origin|Destination|Airline|LF|
+|------|-----------|-------|---|
+|BWI|IAH|Spirit|1.004579|
+|BDL|CLT|American|0.996449|
+|LAS|BUF|Southwest|0.994006|
+|...|
+|LAX|GJT|SkyWest|0.111765|
+|MCW|ORD|SkyWest|0.106667|
+|MCW|ORD|SkyWest|0.104211|
+
+The domestic performance of load factor by route highlights some interesting properties in the data. Spirit's Baltimore to Houston route apparently has a load factor of just over 100%. Though Spirit is known for their cramped planes, the load factors should be contrained to the range of 0-100% - it is impossible to have more passengers than seats. What is likely occuring here is overbooking on the behalf of Spirit. Briefly explained, the practice of overbooking refers to selling more seats than are available, knowing that a certain percentage of passengers are likely to miss their flight. While most US airlines no longer practice overbooking, Spirit is a notable exception and seemingly boosts their load factors using this strategy. 
+
+We also see that 2 of the top 3 routes are long-haul point-to-point routes with destinations that are typically more leisure-oriented. Additionally, we see a leisure-oriented destination (Hartford, CT) connecting to American's hub in Charlotte, NC. Though we cannot draw conclusions from a top 3 sample, the high load factors on these routes suggests additional analysis may be merited to discover a correlation between long-haul leisure destinations and load factor, despite the fact that leisure-oriented carriers tend to rank lower than their legacy counterparts in overall network load factor (see below).
+
+At the bottom of the table, we see small airports served by SkyWest, a regional airline that operates smaller planes on behalf of all 3 legacy carriers (American, Delta, and United). These flights are sold and branded as legacy airline flights, but operated by SkyWest. This is likely why we see MCW-ORD show up twice at the bottom of the table, likely once as an American flight operated by SkyWest and once as a United flight operated by SkyWest. Unsurprisingly, each of the bottom 3 pairings are to minor airports (Mason City, IA and Grand Junction, CO) and are likely supported by the Essential Air Service.
+
+#### Best & Worst LF by Route & Airline (All Routes)
+|Origin|Destination|Airline|LF|
+|------|-----------|-------|---|
+|BWI|IAH|Spirit|1.004579|
+|BDL|CLT|American|0.996449|
+|LAS|BUF|Southwest|0.994006|
+|...|
+|LAX|GJT|SkyWest|0.111765|
+|MCW|ORD|SkyWest|0.106667|
+|MCW|ORD|SkyWest|0.104211|
+
+Interestingly, the overall results (unfiltered to include both domestic and international routes) mirrors the domestic table exactly.
 
 #### Overall Load Factor by Carrier
 |Carrier|Total LF|Domestic LF|International LF|
@@ -41,7 +70,7 @@ Looking at the best and worst performing international routes by load factor, we
 |Southwest Airlines Co.|0.780325|0.778630|0.859099|
 |Frontier Airlines Inc.|0.767294|0.770876|0.713395|
 
-As the table shows, in Q1/Q2 of 2024, Delta had the best load factor performance from an overall perspective as well as in the domestic and international categories. Meanwhile Frontier was the worst performer in all three of these categories, though their domestic performance is only slightly below Southwest, which also underperformed relative to other airlines. Along with Republic Airlines, Southwest and Frontier join to be the only 3 carriers with an overall or domestic load factor below 80%. While the legacy carriers are among the top performers in load factor, 2 ULCCs (Allegiant and Sun Country) boast strong results boosted by domestic LF and surpass American and United to claim the #2 and #3 spots respectively. 
+Next we analyze the overall load factor each airline had across its entire network, including breakdowns along domestic and international lines. As the table shows, in Q1/Q2 of 2024, Delta had the best load factor performance from an overall perspective as well as in the domestic and international categories. Meanwhile Frontier was the worst performer in all three of these categories, though their domestic performance is only slightly below Southwest, which also underperformed relative to other airlines. Along with Republic Airlines, Southwest and Frontier join to be the only 3 carriers with an overall or domestic load factor below 80%. While the legacy carriers are among the top performers in load factor, 2 ULCCs (Allegiant and Sun Country) boast strong results boosted by domestic LF and surpass American and United to claim the #2 and #3 spots respectively. 
 
 
 
