@@ -48,7 +48,7 @@ As the table shows, in Q1/Q2 of 2024, Delta had the best load factor performance
 ## Methodologies
 
 ### Load Factor
-This analysis focused only on major US carriers as defined by the DOT (carriers with annual revenue >$1B). The data include a classification scheme under the variable `CARRIER_GROUP_NEW`. Filtering this provides a list of major airlines but includes cargo flights as well as commercial. Rather than filter wholesale by airlines, since many airlines perform both passenger and cargo service, I filtered on the flight level to include all flights with at least 1 passenger.
+This analysis focused only on major US carriers as defined by the DOT (carriers with annual revenue >$1B). The data include a classification scheme under the variable `CARRIER_GROUP_NEW`, which, when filtered, provides a list of major airlines, but includes those with cargo flights as well as passenger service. Rather than filtering wholesale by airlines, since many airlines perform both types of service, filtering flight level to include all flights with at least 1 passenger succinctly excludes all cargo-only flights while ensuring no passenger service is excluded.
 ```python
 # Filter only major carriers (TranStats category 3)
 major_carriers = big_table.loc[big_table['CARRIER_GROUP_NEW'] == 3]
@@ -61,7 +61,7 @@ This yielded all commercial passenger flights on major airlines as desired. Howe
 # Filter flights performed
 major_passenger_flights = major_passenger_flights[major_passenger_flights['DEPARTURES_PERFORMED'] > 10]
 ```
-Now, to distinguish between domestic and international flights, the DOT uses a `REGION` category, rather than a straight binary. Accordingly, there are several different values that correspond to international flights, yet only one that corresponds to domestic air travel. We can use this latter value to filter flights as domestic or not domestic (i.e. international). Here I used an anonymous lambda function to create a new column titled "DOMESTIC" that had a value of either `D` for domestic or `I` for international.
+Now, to distinguish between domestic and international flights, the DOT uses a `REGION` category, rather than a straight binary. Accordingly, there are several different values that correspond to international flights, yet only one that corresponds to domestic air travel. We can use this latter value to filter flights as domestic or not domestic (i.e. international). Here I used an anonymous lambda function to create a new column titled `DOMESTIC`, with a value of either `D` for domestic or `I` for international.
 
 ```python
 major_passenger_flights['DOMESTIC'] = major_passenger_flights['REGION'].apply(lambda x: 'D' if x == 'D' else 'I')
