@@ -67,5 +67,60 @@ Now, to distinguish between domestic and international flights, the DOT uses a `
 major_passenger_flights['DOMESTIC'] = major_passenger_flights['REGION'].apply(lambda x: 'D' if x == 'D' else 'I')
 ```
 
-Finally, with a complete dataset we could analyze routes by airline and load factor. 
+Finally, with a complete dataset we can analyze routes by airline and load factor. 
 
+The next task of this analysis was to calculate each airline's overall load factor. If we want to understand this by overall region, the formula is a fairly simple `groupby` aggregation.
+
+```python
+seats_by_carrier = major_passenger_flights.groupby(['CARRIER_NAME', 'REGION']).agg({'SEATS': 'sum', 'PASSENGERS': 'sum'}).reset_index()
+```
+
+However, to understand the load factor overall and by the international/domestic breakdown, we need to implement a more complicated pivot methodology:
+
+```python
+# Pivot to create separate columns for each region and metric
+pivoted_regions = seats_by_carrier.pivot_table(index='CARRIER_NAME', columns='REGION', values=['SEATS', 'PASSENGERS'], fill_value=0)
+
+# Flatten the MultiIndex in columns and rename columns
+pivoted_regions.columns = [f'{metric}_{region}' for metric, region in pivoted_regions.columns]
+
+# Reset index to turn CARRIER_NAME back into a column
+pivoted_regions = pivoted_regions.reset_index()
+```
+
+Combining the pivot and `groupby`/`agg` methodologies, we implement the following:
+
+```python
+# Lamda function to categorize flights as domestic/international
+major_passenger_flights['DOMESTIC'] = major_passenger_flights['REGION'].apply(lambda x: 'D' if x == 'D' else 'I')
+
+# Group by CARRIER_NAME and DOMESTIC, then sum SEATS and PASSENGERS
+seats_by_carrier = major_passenger_flights.groupby(['CARRIER_NAME', 'DOMESTIC']).agg({
+    'SEATS': 'sum',
+    'PASSENGERS': 'sum'
+}).reset_index()
+
+# Pivot to create separate columns for Domestic and International regions
+pivoted_ID_seats_pax = seats_by_carrier.pivot_table(index='CARRIER_NAME', columns='DOMESTIC', values=['SEATS', 'PASSENGERS'], fill_value=0)
+
+# Flatten the MultiIndex in columns and rename columns
+pivoted_ID_seats_pax.columns = [f'{metric}_{region}' for metric, region in pivoted_ID_seats_pax.columns]
+
+# Reset index to turn CARRIER_NAME back into a column
+pivoted_ID_seats_pax = pivoted_ID_seats_pax.reset_index()
+```
+
+It is then a simple matter to add the load factor calculation.
+
+```python
+LF_by_carrier = pivoted_ID_seats_pax
+LF_by_carrier['Total LF'] = (pivoted_ID_seats_pax['PASSENGERS_D'] + pivoted_ID_seats_pax['PASSENGERS_I']) / (pivoted_ID_seats_pax['SEATS_D'] + pivoted_ID_seats_pax['SEATS_I'])
+LF_by_carrier['Domestic LF'] = pivoted_ID_seats_pax['PASSENGERS_D'] / pivoted_ID_seats_pax['SEATS_D']
+LF_by_carrier['International LF'] = pivoted_ID_seats_pax['PASSENGERS_I'] / pivoted_ID_seats_pax['SEATS_I']
+```
+
+Finally, we select the columns for display and sort by overall load factor in descending order.
+```python
+LF_by_carrier = LF_by_carrier.loc[:, ['CARRIER_NAME', 'Total LF', 'Domestic LF', 'International LF']]
+LF_by_carrier.sort_values(by='Total LF', ascending=False)
+````
