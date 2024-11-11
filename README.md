@@ -8,6 +8,8 @@ The primary dataset is the U.S. DOT T-100 data for Q1 & Q2 of 2024. It is public
 
 ### Load Factor by Carrier
 
+#### Test
+
 |Carrier|Total LF|Domestic LF|International LF|
 |-------|--------|-----------|----------------|
 |Delta Air Lines Inc.|0.862686|0.864426|0.853418|
@@ -25,4 +27,4 @@ The primary dataset is the U.S. DOT T-100 data for Q1 & Q2 of 2024. It is public
 |Southwest Airlines Co.|0.780325|0.778630|0.859099|
 |Frontier Airlines Inc.|0.767294|0.770876|0.713395|
 
-As the table shows, in Q1/Q2 of 2024, Delta had the best load factor performance from an overall perspective as well as in the domestic and international categories. Meanwhile Frontier was the worst performer in all three of these categories, though their domestic performance is only slightly below Southwest, which also underperformed relative to other airlines. Along with Republic Airlines, Southwest and Frontier join to be the only 3 carriers with an overall or domestic load factor below 80%.
+As the table shows, in Q1/Q2 of 2024, Delta had the best load factor performance from an overall perspective as well as in the domestic and international categories. Meanwhile Frontier was the worst performer in all three of these categories, though their domestic performance is only slightly below Southwest, which also underperformed relative to other airlines. Along with Republic Airlines, Southwest and Frontier join to be the only 3 carriers with an overall or domestic load factor below 80%. While the legacy carriers are among the top performers in load factor, 2 ULCCs (Allegiant and Sun Country) boast strong results boosted by domestic LF and surpass American and United to claim the #2 and #3 spots respectively. 
