@@ -7,6 +7,7 @@ The primary dataset is the U.S. DOT T-100 data for Q1 & Q2 of 2024. It is public
 ## Findings
 
 ### Load Factor
+File: [`Load Factor Analysis`](https://github.com/admacpherson/T-100-Aviation-Data/blob/main/Load%20Factor%20Analysis.ipynb) | [Jump to Methodology](https://github.com/admacpherson/T-100-Aviation-Data/blob/main/README.md#load-factor-1)<br><br>
 The analysis of load factor can be performed along several different variables. Here, we analyze the top performing routes, domestically, internationally, and abroad, as well as total load factor by airline along the same categories.
 
 #### Best & Worst International LF by Route & Airline
@@ -77,6 +78,7 @@ Next we analyze the overall load factor each airline had across its entire netwo
 ## Methodologies
 
 ### Load Factor
+File: [`Load Factor Analysis`](https://github.com/admacpherson/T-100-Aviation-Data/blob/main/Load%20Factor%20Analysis.ipynb) | [Jump to Analysis](https://github.com/admacpherson/T-100-Aviation-Data/blob/main/README.md#load-factor)<br><br>
 This analysis focused only on major US carriers as defined by the DOT (carriers with annual revenue >$1B). The data include a classification scheme under the variable `CARRIER_GROUP_NEW`, which, when filtered, provides a list of major airlines, but includes those with cargo flights as well as passenger service. Rather than filtering wholesale by airlines, since many airlines perform both types of service, filtering flight level to include all flights with at least 1 passenger succinctly excludes all cargo-only flights while ensuring no passenger service is excluded.
 ```python
 # Filter only major carriers (TranStats category 3)
