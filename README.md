@@ -73,6 +73,40 @@ Interestingly, the overall results (unfiltered to include both domestic and inte
 
 Next we analyze the overall load factor each airline had across its entire network, including breakdowns along domestic and international lines. As the table shows, in Q1/Q2 of 2024, Delta had the best load factor performance from an overall perspective as well as in the domestic and international categories. Meanwhile Frontier was the worst performer in all three of these categories, though their domestic performance is only slightly below Southwest, which also underperformed relative to other airlines. Along with Republic Airlines, Southwest and Frontier join to be the only 3 carriers with an overall or domestic load factor below 80%. While the legacy carriers are among the top performers in load factor, 2 ULCCs (Allegiant and Sun Country) boast strong results boosted by domestic LF and surpass American and United to claim the #2 and #3 spots respectively. 
 
+#### Best LF by Origin
+
+|DEST|City|LF|DEPARTURES PERFORMED|
+|---|---|---|---|
+|PRG|Prague, Czech Republic|0.937301|83|
+|ATH|Athens, Greece|0.926690|1017|
+|RFD|Rockford, IL|0.912462|253|
+|ARN|Stockholm, Sweden|0.905959|136|
+|DOH|Doha, Qatar|0.904475|210|
+
+International cities dominate this list, with 4 of the top 5 being long haul international destinations. The notable exception is RFD, a distant suburb of Chicago served exclusively by Allegiant for passenger service.
+
+#### Best Domestic LF by Origin
+
+|DEST|City|LF|DEPARTURES PERFORMED|
+|---|---|---|---|
+|RFD|Rockford, IL|0.912462|253|
+|LNK|Lincoln, NE|0.897701|772|
+|ABE|Allentown/Bethlehem/Easton,PA|0.895144|1013|
+|STC|St. Cloud, MN|0.895127|40|
+|PVU|Provo, UT|0.892846|585|
+
+Exploring now domestic load factor performance, we see that the top 5 destination airports by load factor all appear to be smaller airports with less commercial service. In fact, 4 of the 5 are located in the Midwest. Nonetheless, only 1 destination - Rockford, Illinois, boasts an average load factor above 90%.
+
+#### Best Domestic LF by Destination
+|ORIGIN|City|LF|DEPARTURES PERFORMED|
+|---|---|---|---|
+|PPG|Pago Pago, TT|0.964628|36|
+|MFE|Mission/McAllen/Edinburg, TX|0.909346|2081|
+|LNK|Lincoln, NE|0.907876|774|
+|LCK|Columbus, OH|0.903170|278|
+|PVU|Provo, UT|0.901945|591|
+
+Topping the list of domestic load factor by origin is an airport that's hardly in the United States at all. Pago Pago is the capital of American Samoa, an unincorporated territory of the United States in the southern Pacific Ocean. Though the sample size is small, departures from Pago Pago boast an impressive 96.5% load factor. The rest of the list sees some repeats (Lincoln, Provo) and consists again of small airports. Notably, there are two secondary airports in the list. Columbus LCK provides secondary service to Columbus OH, after CMH, and is exclusively served by Allegiant. Meanwhile Provo PVU serves the Greater Salt Lake City region and is served by Breeze, American Eagle (AA's regional service), and Allegiant. Though the sample size is small,  Allegiant's presence at the top of all three lists suggests their strategy of secondary airports correlates strongly with their ability to fill planes.
 
 
 ## Methodologies
