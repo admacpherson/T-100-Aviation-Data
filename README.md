@@ -56,18 +56,18 @@ Interestingly, the overall results (unfiltered to include both domestic and inte
 #### Overall Load Factor by Carrier
 |Carrier|Total LF|Domestic LF|International LF|
 |-------|--------|-----------|----------------|
-|Delta Air Lines Inc.|0.862686|0.864426|0.853418|
-|Allegiant Air|0.859050|0.859050|NaN|
-|Sun Country Airlines d/b/a MN Airlines|0.856746|0.865843|0.798086|
-|American Airlines Inc.|0.843187|0.843864|0.840523|
-|United Air Lines Inc.|0.840662|0.851609|0.807783|
+|Delta Air Lines Inc.|0.862686|0.864386|0.854014|
+|Allegiant Air|0.859050|0.859196|0.772746|
+|Sun Country Airlines d/b/a MN Airlines|0.856746|0.866856|0.793314|
+|American Airlines Inc.|0.843187|0.843518|0.841933|
+|United Air Lines Inc.|0.840662|0.850916|0.812517|
 |Spirit Air Lines|0.822254|0.828956|0.766056|
-|Envoy Air|0.821440|0.823843|0.788894|
-|JetBlue Airways|0.818494|0.826618|0.797715|
-|Alaska Airlines Inc.|0.817015|0.815006|0.847703|
-|Hawaiian Airlines Inc.|0.811663|0.816743|0.760081|
-|SkyWest Airlines Inc.|0.804319|0.804277|0.808450|
-|Republic Airline|0.794361|0.794361|NaN|
+|Envoy Air|0.821440|0.823591|0.796062|
+|JetBlue Airways|0.818494|0.825273|0.801065|
+|Alaska Airlines Inc.|0.817015|0.814979|0.847187|
+|Hawaiian Airlines Inc.|0.811663|0.817055|0.755141|
+|SkyWest Airlines Inc.|0.804319|0.803651|0.822122|
+|Republic Airline|0.794361|0.794789418361|0.845860|
 |Southwest Airlines Co.|0.780325|0.778630|0.859099|
 |Frontier Airlines Inc.|0.767294|0.770876|0.713395|
 
