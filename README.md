@@ -67,7 +67,7 @@ Interestingly, the overall results (unfiltered to include both domestic and inte
 |Alaska Airlines Inc.|0.817015|0.814979|0.847187|
 |Hawaiian Airlines Inc.|0.811663|0.817055|0.755141|
 |SkyWest Airlines Inc.|0.804319|0.803651|0.822122|
-|Republic Airline|0.794361|0.794789418361|0.845860|
+|Republic Airline|0.794361|0.789418|0.845860|
 |Southwest Airlines Co.|0.780325|0.778630|0.859099|
 |Frontier Airlines Inc.|0.767294|0.770876|0.713395|
 
