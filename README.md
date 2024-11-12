@@ -2,7 +2,7 @@
 The goal of this repository is to provide insightful analysis of aviation data using various Python tools including `numpy` and `pandas`.
 
 ## About the data
-The primary dataset is the U.S. DOT T-100 data for Q1 & Q2 of 2024. It is publicly available from the [Bureau of Transportation TranStats](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FMG). There are also various helper tables, sourced also from the Bereau of Transportation. These lookup tables translate T-100 codes into plain text. For example, `WAC = 15`, corresponds to the region of Rhode Island. All data used can be found in the 📁[`data`](https://github.com/admacpherson/T-100-Aviation-Data/tree/main/data) folder of this repository. 
+The primary dataset is the U.S. DOT T-100 data for Q1 & Q2 of 2024. It is publicly available from the [Bureau of Transportation TranStats](https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FMG). There are also various helper tables, sourced also from the Bereau of Transportation. These lookup tables translate T-100 codes into plain text. For example, `WAC = 15`, corresponds to the World Area Code region of Rhode Island. All data used can be found in the 📁[`data`](https://github.com/admacpherson/T-100-Aviation-Data/tree/main/data) folder of this repository. 
 
 ## Findings
 
@@ -92,18 +92,36 @@ This yielded all commercial passenger flights on major airlines as desired. Howe
 # Filter flights performed
 major_passenger_flights = major_passenger_flights[major_passenger_flights['DEPARTURES_PERFORMED'] > 10]
 ```
-Now, to distinguish between domestic and international flights, the DOT uses a `REGION` category, rather than a straight binary. Accordingly, there are several different values that correspond to international flights, yet only one that corresponds to domestic air travel. We can use this latter value to filter flights as domestic or not domestic (i.e. international). Here I used an anonymous lambda function to create a new column titled `DOMESTIC`, with a value of either `D` for domestic or `I` for international.
+Now, the data do not include a binary variable to distinguish between domestic and international flights. To do so, we must rely on the origin and destination countries, represented as `ORIGIN_COUNTRY_NAME` and `DEST_COUNTRY_NAME`. Since, by definition of the dataset, every flights either starts or ends in the United States, we can define domestic flights as those where both the origin and destination country are both the United States, and international flights as those where exactly one of those is not the United States. 
 
 ```python
-major_passenger_flights['DOMESTIC'] = major_passenger_flights['REGION'].apply(lambda x: 'D' if x == 'D' else 'I')
+if dom_only == True:
+        df = df[(df['ORIGIN_COUNTRY_NAME'] == 'United States') & (df['DEST_COUNTRY_NAME'] == 'United States')]
+    if int_only == True:
+        df = df[(df['ORIGIN_COUNTRY_NAME'] != 'United States') | (df['DEST_COUNTRY_NAME'] != 'United States')]
+```
+
+We can also add a column to the data that categorizes each flight in the dataset. Here I used an anonymous lambda function to create a new column titled `DOMESTIC`, with a value of either `D` for domestic or `I` for international.
+
+```python
+major_passenger_flights['DOMESTIC'] = major_passenger_flights.apply(lambda row: 'D' if row['ORIGIN_COUNTRY_NAME'] == 'United States' and row['DEST_COUNTRY_NAME'] == 'United States' else 'I', axis=1)
 ```
 
 Finally, with a complete dataset we can analyze routes by airline and load factor. 
 
+Using the previously defined data frames, it is a simple matter to select the applicable data set (domestic/international/all), include the desired columns, and sort by load factor.
+
+```python
+# Select and order specified columns for international flights
+mpf_int_abbrv = int_flights.loc[:, ['ORIGIN', 'DEST', 'ORIGIN_CITY_NAME', 'DEST_CITY_NAME','CARRIER_NAME', 'DEPARTURES_PERFORMED', 'SEATS', 'PASSENGERS', 'LF', 'DISTANCE']]
+# Sort individual carrier routes by load factor
+mpf_int_abbrv.sort_values(by='LF', ascending=False)
+```
+
 The next task of this analysis was to calculate each airline's overall load factor. If we want to understand this by overall region, the formula is a fairly simple `groupby` aggregation.
 
 ```python
-seats_by_carrier = major_passenger_flights.groupby(['CARRIER_NAME', 'REGION']).agg({'SEATS': 'sum', 'PASSENGERS': 'sum'}).reset_index()
+seats_by_carrier = major_passenger_flights.groupby(['CARRIER_NAME', 'DOMESTIC']).agg({'SEATS': 'sum', 'PASSENGERS': 'sum'}).reset_index()
 ```
 
 However, to understand the load factor overall and by the international/domestic breakdown, we need to implement a more complicated pivot methodology:
@@ -118,13 +136,10 @@ pivoted_regions.columns = [f'{metric}_{region}' for metric, region in pivoted_re
 # Reset index to turn CARRIER_NAME back into a column
 pivoted_regions = pivoted_regions.reset_index()
 ```
-
+This leaves us with 4 new columns: `PASSENGERS_D`, `PASSENGERS_I`, `SEATS_D`, and `SEATS_I`.
 Combining the pivot and `groupby`/`agg` methodologies, we implement the following:
 
 ```python
-# Lamda function to categorize flights as domestic/international
-major_passenger_flights['DOMESTIC'] = major_passenger_flights['REGION'].apply(lambda x: 'D' if x == 'D' else 'I')
-
 # Group by CARRIER_NAME and DOMESTIC, then sum SEATS and PASSENGERS
 seats_by_carrier = major_passenger_flights.groupby(['CARRIER_NAME', 'DOMESTIC']).agg({
     'SEATS': 'sum',
