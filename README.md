@@ -204,3 +204,39 @@ Finally, we select the columns for display and sort by overall load factor in de
 LF_by_carrier = LF_by_carrier.loc[:, ['CARRIER_NAME', 'Total LF', 'Domestic LF', 'International LF']]
 LF_by_carrier.sort_values(by='Total LF', ascending=False)
 ````
+
+To compute the top origins and destinations by load factor, we merely need to aggregate on the applicable variables (`SEATS` and `PASSENGERS` to calculate `LF` and `DEPARTURES_PERFORMED` to keep us aware of the sample size)
+
+```python
+# Aggregate seats, pax, and departures by origin airport/city name
+flights_by_dest = major_passenger_flights.groupby(['DEST', 'DEST_CITY_NAME']).agg({
+    'SEATS': 'sum',
+    'PASSENGERS': 'sum',
+    'DEPARTURES_PERFORMED': 'sum'
+    ''
+}).reset_index()
+```
+
+We can then calculate our familiar load factor formula and sort and select the relevant columns
+```python
+# Calculate load factor
+flights_by_dest['LF'] = flights_by_dest['PASSENGERS'] / flights_by_dest['SEATS']
+# Select columns and sort by load factor (highest to lowest)
+flights_by_dest.loc[:,['DEST', 'DEST_CITY_NAME', 'LF','DEPARTURES_PERFORMED']].sort_values(by='LF', ascending=False)
+```
+
+Repeating this process for domestic flights, simply requires substituting our data frame and selecting `ORIGIN`/`ORIGIN_CITY_NAME` where applicable:
+
+```python
+# Repeat analysis with domestic flights
+# Aggregate seats, pax, and departures by origin airport/city name
+dom_flights_by_origin = dom_flights.groupby(['ORIGIN', 'ORIGIN_CITY_NAME']).agg({
+    'SEATS': 'sum',
+    'PASSENGERS': 'sum',
+    'DEPARTURES_PERFORMED': 'sum'
+}).reset_index()
+# Calculate load factor
+dom_flights_by_origin['LF'] = dom_flights_by_origin['PASSENGERS'] / dom_flights_by_origin['SEATS']
+# Select columns and sort by load factor (highest to lowest)
+dom_flights_by_origin.loc[:,['ORIGIN', 'ORIGIN_CITY_NAME', 'LF','DEPARTURES_PERFORMED']].sort_values(by='LF', ascending=False)
+```
